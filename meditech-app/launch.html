@@ -13,7 +13,8 @@
     <script>
       FHIR.oauth2.authorize({
         'client_id': 'TellHealth@afb279147cf24726a1340157e1d8fb82', //Your app client ID
-        'scope':  'launch user/*.* openid profile' //'patient/*.read launch'
+        'client_secret': '5a1H0gJGTgSKux3LWqxc3g==',
+        'scope':  'launch/patient patient/*.read' //'patient/*.read launch'
       });
     </script>
     <div class="spinner">
