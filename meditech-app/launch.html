@@ -14,7 +14,8 @@
       FHIR.oauth2.authorize({
         'client_id': 'TellHealth@afb279147cf24726a1340157e1d8fb82', //Your app client ID
         'client_secret': '5a1H0gJGTgSKux3LWqxc3g==',
-        'scope':  'patient/*.read user/*.* openid' //'patient/*.read launch'
+        'redirect_uri': 'https://api.tell.health/oauth/redirect-url',
+        'scope': 'patient/*.read launch/patient' 
       });
     </script>
     <div class="spinner">
