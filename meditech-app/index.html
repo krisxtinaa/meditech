@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Meditech App</title>
-
-    <link rel='stylesheet' type='text/css' href='./src/css/meditech-app.css'>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arvo&family=Kumbh+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./src/css/meditech-app.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
+
   <body>
-    <div id='errors'>
+    <div class="content unauthorized">
+      <div class="content-bottom">
+        <a class="btn" href="/auth">Authorize</a>
+        <p class="sign-in-text">in order to get started</p>
+      </div>
     </div>
-    <div id="loading" class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
+    <div class="content authorized" style="display: none">
+      <div id='errors'>
+      </div>
+      <div id="loading" class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+      <div id='holder' >
+        <h2>Meditech App</h2>
+  
+        <h2>Patient Resource</h2>
+        <table>
+          <tr>
+            <th>First Name:</th>
+            <td id='fname'></td>
+          </tr>
+          <tr>
+            <th>Last Name:</th>
+            <td id='lname'></td>
+          </tr>
+          <tr>
+            <th>Gender:</th>
+            <td id='gender'></td>
+          </tr>
+          <tr>
+            <th>Date of Birth:</th>
+            <td id='birthdate'></td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div id='holder' >
-      <h2>Meditech App</h2>
+    <script type="text/javascript" src="meditech-app.js"></script>
+    
+     <!-- FHIR Client JS Library -->
+     <script src='./lib/js/fhir-client-v0.1.12.js'></script>
 
-      <h2>Patient Resource</h2>
-      <table>
-        <tr>
-          <th>First Name:</th>
-          <td id='fname'></td>
-        </tr>
-        <tr>
-          <th>Last Name:</th>
-          <td id='lname'></td>
-        </tr>
-        <tr>
-          <th>Gender:</th>
-          <td id='gender'></td>
-        </tr>
-        <tr>
-          <th>Date of Birth:</th>
-          <td id='birthdate'></td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Application-level javascript-->
-    <script src='./src/js/meditech-app.js'></script>
-
-    <!-- FHIR Client JS Library -->
-    <script src='./lib/js/fhir-client-v0.1.12.js'></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-      extractData().then(
-        //Display Patient Demographics and Observations if extractData was success
-        function(p) {
-          drawVisualization(p);
-        },
-
-        //Display 'Failed to call FHIR Service' if extractData failed
-        function() {
-          $('#loading').hide();
-          $('#errors').html('<p> Failed to call FHIR Service </p>');
-        }
-      );
-    </script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <script>
+       extractData().then(
+         //Display Patient Demographics and Observations if extractData was success
+         function(p) {
+           drawVisualization(p);
+         },
+ 
+         //Display 'Failed to call FHIR Service' if extractData failed
+         function() {
+           $('#loading').hide();
+           $('#errors').html('<p> Failed to call FHIR Service </p>');
+         }
+       );
+     </script>
   </body>
 </html>
