@@ -13,14 +13,14 @@ app.get('/', (req, res) => {
 
 app.get('/auth', (req, res) => {
   res.redirect(
-    `https://greenfield-apis.meditech.com/oauth/authorize?client_id=${process.env.CLIENT_ID}`,
+    'https://greenfield-apis.meditech.com/oauth/authorize?client_id=TellHealth@afb279147cf24726a1340157e1d8fb82',
   );
 });
 
 app.get('/oauth-callback', ({ query: { code } }, res) => {
   const body = {
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.GLIENT_SECRET,
+    client_id: 'TellHealth@afb279147cf24726a1340157e1d8fb82',
+    client_secret: '5a1H0gJGTgSKux3LWqxc3g==',
     code,
   };
   const opts = { headers: { accept: 'application/json' } };
