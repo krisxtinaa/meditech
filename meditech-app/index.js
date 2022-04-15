@@ -13,7 +13,7 @@ app.get('/meditech-app/', (req, res) => {
 
 app.get('/meditech-app/auth', (req, res) => {
   res.redirect(
-    `https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Fapi.tell.health%2Foauth%2Fredirect-url`,
+    `https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&state=125624&patient/*.readlaunch/patient&redirect_uri=https://api.tell.health/oauth/redirect-url`,
   );
 });
 
