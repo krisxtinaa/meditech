@@ -7,20 +7,20 @@ const app = express();
 
 app.use(express.static('static'));
 
-app.get('/', (req, res) => {
+app.get('/meditech-app/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-app.get('/auth', (req, res) => {
+app.get('/meditech-app/auth', (req, res) => {
   res.redirect(
-    'https://greenfield-apis.meditech.com/oauth/authorize?client_id=TellHealth@afb279147cf24726a1340157e1d8fb82',
+    `https://greenfield-apis.meditech.com/oauth/authorize?client_id=${process.env.CLIENT_ID}`,
   );
 });
 
-app.get('/oauth-callback', ({ query: { code } }, res) => {
+app.get('/meditech-app/oauth-callback', ({ query: { code } }, res) => {
   const body = {
-    client_id: 'TellHealth@afb279147cf24726a1340157e1d8fb82',
-    client_secret: '5a1H0gJGTgSKux3LWqxc3g==',
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.GLIENT_SECRET,
     code,
   };
   const opts = { headers: { accept: 'application/json' } };
