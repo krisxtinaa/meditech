@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/auth', (req, res) => {
   res.redirect(
-    'https://greenfield-apis.meditech.com/oauth/authorize?client_id=TellHealth@afb279147cf24726a1340157e1d8fb82',
+    'https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=TellHealth%40afb279147cf24726a1340157e1d8fb82&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Fapi.tell.health%2Foauth%2Fredirect-url'
   );
 });
 
@@ -38,3 +38,4 @@ app.get('/oauth-callback', ({ query: { code } }, res) => {
 app.listen(3000);
 // eslint-disable-next-line no-console
 console.log('App listening on port 3000');
+
