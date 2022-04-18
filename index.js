@@ -19,8 +19,8 @@ app.get('/static/index.html/auth', (req, res) => {
 
 app.get('/static/index.html/oauth-callback', ({ query: { code } }, res) => {
   const body = {
-    client_id: 'TellHealth@afb279147cf24726a1340157e1d8fb82',
-    client_secret: '5a1H0gJGTgSKux3LWqxc3g==',
+    client_id: process.env.client_id,
+    client_secret: process.env.client_secret,
     code,
   };
   const opts = { headers: { accept: 'application/json' } };
