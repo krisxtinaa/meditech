@@ -9,14 +9,14 @@
       href="https://fonts.googleapis.com/css2?family=Arvo&family=Kumbh+Sans&display=swap"
       rel="stylesheet"
     />
-    <link href="/static/style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
     <div class="content unauthorized">
       <div class="content-bottom">
-        <a class="btn" href= 'https://greenfield-apis.meditech.com/oauth/authorize?response_type=${process.env.response_type}&client_id=${process.env.client_id}&state=${process.env.state}&scope=${process.env.scope}&redirect_uri=${process.env.redirect_uri}',>SIGN IN</a>
+        <a class="btn" href= 'https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=TellHealth%40afb279147cf24726a1340157e1d8fb82&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Fapi.tell.health%2Foauth%2Fredirect-url',>SIGN IN</a>
       </div>
     </div>
     <div class="content authorized" style="display: none">
@@ -24,7 +24,6 @@
         <h1><span class="party-popper">🎉</span><br />Awesome!<br />You're authorized 🔒</h1>
       </div>
     </div>
-    <script type="text/javascript" src="/static/main.js"></script>
-    <script type="text/javascript" src="/static/main.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
