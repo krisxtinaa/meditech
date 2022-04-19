@@ -16,7 +16,7 @@
   <body>
     <div class="content unauthorized">
       <div class="content-bottom">
-        <a class="btn" href="/auth">SIGN IN</a>
+        <a class="btn" href= 'https://greenfield-apis.meditech.com/oauth/authorize?response_type=${process.env.response_type}&client_id=${process.env.client_id}&state=${process.env.state}&scope=${process.env.scope}&redirect_uri=${process.env.redirect_uri}',>SIGN IN</a>
       </div>
     </div>
     <div class="content authorized" style="display: none">
