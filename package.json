@@ -1,12 +1,13 @@
 {
   "name": "repo-health-server",
+  "homepage": "https://krisxtinaa.github.io/meditech/",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index.js",
+    "test": "echo s\"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",

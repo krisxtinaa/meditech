@@ -7,21 +7,21 @@ const app = express();
 
 app.use(express.static('static'));
 
-app.get('/static/index.html', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/static/index.html'));
 });
 
-app.get('/static/index.html/auth', (req, res) => {
+app.get('/auth', (req, res) => {
   res.redirect(
     `https://greenfield-apis.meditech.com/oauth/authorize?response_type=${process.env.response_type}&client_id=${process.env.client_id}&state=${process.env.state}&scope=${process.env.scope}&redirect_uri=${process.env.redirect_uri}`,
   );
 });
 
-app.get('/static/index.html/oauth-callback', ({ query: { code } }, res) => {
+app.get('/oauth-callback', ({ query: { code } }, res) => {
   const body = {
-    client_id: 'TellHealth@afb279147cf24726a1340157e1d8fb82',
-    client_secret: '5a1H0gJGTgSKux3LWqxc3g==',
     code,
+    client_id: process.env.client_id,
+    client_secret: process.env.client_secret,
   };
   const opts = { headers: { accept: 'application/json' } };
   axios
@@ -36,5 +36,4 @@ app.get('/static/index.html/oauth-callback', ({ query: { code } }, res) => {
 });
 
 app.listen(3000);
-// eslint-disable-next-line no-console
 console.log('App listening on port 3000');
