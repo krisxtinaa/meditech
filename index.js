@@ -13,15 +13,17 @@ app.get('/', (req, res) => {
 
 app.get('/auth', (req, res) => {
   res.redirect(
-    `https://greenfield-apis.meditech.com/oauth/authorize?response_type=${process.env.response_type}&client_id=${process.env.client_id}&state=${process.env.state}&scope=${process.env.scope}&redirect_uri=${process.env.redirect_uri}`,
+    'https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=TellHealth%40afb279147cf24726a1340157e1d8fb82&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Fapi.tell.health%2Foauth%2Fredirect-url'
   );
 });
 
 app.get('/oauth-callback', ({ query: { code } }, res) => {
   const body = {
+    grant_type: 'authorization_code',
     code,
-    client_id: process.env.client_id,
-    client_secret: process.env.client_secret,
+    redirect_uri: 'https://api.tell.health/oauth/redirect-url',
+    client_id:  'TellHealth@afb279147cf24726a1340157e1d8fb82',
+    //client_secret: process.env.client_secret
   };
   const opts = { headers: { accept: 'application/json' } };
   axios
