@@ -1,133 +1,61 @@
-require('dotenv').config();
-const axios = require('axios');
-const express = require('express');
-const path = require('path');
-const url = require('url');
-const cors = require('cors');
+const express = require("express");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const config = require("config");
 
+const appController = require("./controllers/appController");
+const isAuth = require("./middleware/isAuth");
+const connectDB = require("./config/db");
+const mongoURI = config.get("mongoURI");
+
+// initialize app and db
 const app = express();
+connectDB();
 
-let accessToken = '';
-let refreshToken = '';
-
-app.use(express.static('static'));
-app.use(cors());
-
-app.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, '/static/index.html'));
+const store = new MongoDBStore({
+  uri: mongoURI,
+  collection: "mySessions",
 });
 
+// styling 
+app.use('/public', express.static('public'));
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/auth', async (req, res) => {
-  res.redirect(
-    'https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=TellHealth%40afb279147cf24726a1340157e1d8fb82&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Ftell-health3000.loca.lt%2Fredirect-url'
-    //`https://greenfield-apis.meditech.com/oauth/authorize?response_type=${process.env.response_type}&client_id=${process.env.client_id}&state=${process.env.state}&scope=${process.env.scope}&redirect_uri=${process.env.redirect_uri}`
-    );
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
-app.get('/redirect-url', async (req, res) => {
-  const {code} = req.query;
-
-  if(code) {
-    try {
-      const formData = new url.URLSearchParams({
-        grant_type: process.env.grant_type,
-        code: code.toString(),
-        redirect_uri: process.env.redirect_uri,
-        client_id: process.env.client_id, 
-        client_secret: process.env.client_secret 
-      });
-      const response = await axios.post(
-        'https://greenfield-apis.meditech.com/oauth/token',
-        formData.toString(),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/fhir+json'
-          },
-        }
-      )
-      //.then((_res) => _res.data.access_token)
-      // .then((token) => {
-      //   console.log('My token:', token);
-      //   token = token;
-      //   res.redirect(`/?token=${token}`)});
-
-      const {access_token, refresh_token} = response.data;
-      accessToken = access_token;
-      refreshToken = refresh_token;
-      res.send(response.data);
-    } catch(err) {
-      console.log(err) 
-      res.sendStatus(400);
-    }
-  }
-});
+// session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
 
 
-app.get('/user', async (req, res) => {
-  try { 
-    const response = await axios.get('https://greenfield-apis.meditech.com/v1/argonaut/v1/Patient/925293E8-3491-4E2B-9FE1-46310EE776C2', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        Accept: 'application/fhir+json'
-      },
-    });
-    res.send(response.data)
-  }catch(err) {
-    res.sendStatus(400);
-  }
-});
+// ============ Routes ============ //
 
-app.get('/all_immunizations', async (req, res) => {
-  try { 
-    const response = await axios.get('https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization?patient=925293E8-3491-4E2B-9FE1-46310EE776C2', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        Accept: 'application/fhir+json'
-      },
-    });
-    res.send(response.data)
-  }catch(err) {
-    res.sendStatus(400);
-  }
-});
+// ------ index ------- //
+app.get("/", appController.index_page);
 
-app.get('/immunization', async (req, res) => {
-  try { 
-    const response = await axios.get('https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization/39978591-3362-424b-d6a6-7dd01d9ba78c', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        Accept: 'application/fhir+json'
-      },
-    });
-    res.send(response.data)
-  }catch(err) {
-    res.sendStatus(400);
-  }
-});
+// ------ auth ------- //
+app.get("/auth", appController.auth);
+// retrieve token
+app.get("/redirect-url", appController.redirect_url);
 
+// ------ dashboard ------- //
+app.get("/dashboard", isAuth, appController.dashboard_get);
 
+// // ------ logout ------- //
+app.post("/logout", appController.logout_post);
 
-// app.get('/redirect-url', async ({ query: { code } }, res) => {
-//   const body = { 
-//     grant_type: process.env.grant_type,
-//     code,
-//     redirect_uri: process.env.redirect_uri,
-//     client_id: process.env.client_id, 
-//     client_secret: process.env.client_secret 
-//   };
-//   const opts = { headers: { accept: 'application/json' } };
-//   axios
-//     .post('https://greenfield-apis.meditech.com/oauth/token', body, opts)
-//     .then((_res) => _res.data.access_token)
-//     .then((token) => {
-//       console.log('My token:', token);
-//       token = token;
-//       res.redirect(`/?token=${token}`);
-//     })
-//     .catch((err) => res.status(500).json({ err: err.message }));
-// });
-
-app.listen(8000);
-console.log('App listening on port 8000');
+app.listen(8000, console.log("Server running on port 8000"));

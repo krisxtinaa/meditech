@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo s\"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.7",
+    "connect-mongodb-session": "^3.1.1",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
