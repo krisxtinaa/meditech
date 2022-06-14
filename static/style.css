@@ -2,12 +2,18 @@ body {
   height: 100vh;
   margin: 0;
   color: #222;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Inter';
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgb(71, 43, 186);
   background: linear-gradient(0deg, rgba(71, 43, 186, 1) 0%, rgba(44, 25, 121, 1) 100%);
+}
+
+.img-tellhealth {
+  margin-top: 32px;
+  width: 100px;
+  height: 45px;
 }
 
 .content {
@@ -24,14 +30,14 @@ body {
 }
 
 .content-bottom {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 h1 {
-  font-family: 'Arvo', serif;
+  font-family: 'Inter';
   font-size: 26px;
   margin: 32px auto 24px;
-  line-height: 40px;
+  line-height: 16px;
 }
 
 .img-github {
@@ -43,16 +49,19 @@ h1 {
 .btn {
   text-decoration: none;
   display: block;
-  width: 220px;
+  width: 80px;
+  height: 40px;
   line-height: 38px;
   padding-top: 2px;
-  border-radius: 20px;
+  border-radius: 8px;
   color: white;
-  background: rgba(71, 43, 186, 1);
+  background: #405DD6;;
   margin: 0 auto;
   border: none;
   font-size: 14px;
+  justify-content: center;
 }
+
 
 input[type='text'] {
   width: 180px;
@@ -65,8 +74,4 @@ input[type='text'] {
   font-size: 14px;
   line-height: 22px;
 }
-.party-popper {
-  display: inline-block;
-  font-size: 52px;
-  margin-bottom: 24px;
-}
+

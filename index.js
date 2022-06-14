@@ -3,6 +3,7 @@ const axios = require('axios');
 const express = require('express');
 const path = require('path');
 const url = require('url');
+const cors = require('cors');
 
 const app = express();
 
@@ -10,6 +11,7 @@ let accessToken = '';
 let refreshToken = '';
 
 app.use(express.static('static'));
+app.use(cors());
 
 app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname, '/static/index.html'));
@@ -41,11 +43,11 @@ app.get('/redirect-url', async (req, res) => {
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
+            'Accept': 'application/fhir+json'
           },
         }
       )
-      // .then((_res) => _res.data.access_token)
+      //.then((_res) => _res.data.access_token)
       // .then((token) => {
       //   console.log('My token:', token);
       //   token = token;
@@ -127,5 +129,5 @@ app.get('/immunization', async (req, res) => {
 //     .catch((err) => res.status(500).json({ err: err.message }));
 // });
 
-app.listen(3000);
-console.log('App listening on port 3000');
+app.listen(8000);
+console.log('App listening on port 8000');
