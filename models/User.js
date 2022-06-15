@@ -6,12 +6,12 @@ const userSchema = new Schema({
         type: String, 
         required: true
     },
-    access_token: {
+    gender: {
         type: String
     },
-    refresh_token: {
-        type: String
-    }
+    dob: {
+        type: Date
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);

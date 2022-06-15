@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tell Health</title> 
+    <link rel="stylesheet" href="/public/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="immunizations-single">
+            <% if(immunization != null) { %>
+                <h2><%- immunization.status %></h2>
+                <p><%- immunization.status %></p>
+            <% } else { %>
+                No immunizations found.
+            <% } %>
+    </div>  
+</body>
+</html> 

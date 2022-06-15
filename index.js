@@ -55,6 +55,12 @@ app.get("/redirect-url", appController.redirect_url);
 // ------ dashboard ------- //
 app.get("/dashboard", isAuth, appController.dashboard_get);
 
+// ------ immunizations ------- //
+app.get("/immunizations", appController.immunizations_get);
+
+// ------ immunization ------- //
+app.get('/:id', appController.immunization_get)
+
 // // ------ logout ------- //
 app.post("/logout", appController.logout_post);
 

@@ -2,7 +2,9 @@
     "mongoURI": "mongodb://localhost:27017/sessions",
     "authURI": "https://greenfield-apis.meditech.com/oauth/authorize?response_type=code&client_id=TellHealth%40afb279147cf24726a1340157e1d8fb82&state=125624&scope=patient%2F*.read%20launch%2Fpatient&redirect_uri=https%3A%2F%2Ftell-health3000.loca.lt%2Fredirect-url",
     "tokenURI": "https://greenfield-apis.meditech.com/oauth/token", 
-    "patientURI": "https://greenfield-apis.meditech.com/v1/argonaut/v1/Patient/925293E8-3491-4E2B-9FE1-46310EE776C2",
+    "patientURI": "https://greenfield-apis.meditech.com/v1/argonaut/v1/Patient/",
+    "immunizationsURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization?patient=",
+    "immunizationURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization/",
     "Content-Type": "application/x-www-form-urlencoded",
     "Accept": "application/fhir+json"
 }

@@ -1,14 +1,13 @@
 require('dotenv').config();
 const bcrypt = require("bcryptjs");
-
-const axios = require('axios');
-const urls = require('url');
-
-const User = require("../models/User");
+const Session = require("../models/Session");
 const config = require("config");
+
 const authURI = config.get("authURI");
 const tokenURI = config.get("tokenURI");
 const patientURI = config.get("patientURI");
+const immunizationsURI = config.get("immunizationsURI");
+const immunizationURI = config.get("immunizationURI");
 const _encode = require("../middleware/_encode");
 const contentType = config.get("Content-Type");
 const accept = config.get("Accept");
@@ -30,7 +29,7 @@ exports.auth =  async (req, res) => {
 // ------ redirect ------- //
 exports.redirect_url = async (req, res) => {
   if (!req.query.code) throw new Error("NoCodeProvided");
-  var code = req.query.code;
+  let code = req.query.code;
 
   let data = {
     client_id: process.env.CLIENT_ID,
@@ -43,13 +42,13 @@ exports.redirect_url = async (req, res) => {
 
   params = _encode(data);
 
-  var response = await fetch(tokenURI, {
+  let response = await fetch(tokenURI, {
       method: "POST",
       headers: { "Content-Type": contentType, "Accept": accept },
       body: params,
   });
   
-  var json = await response.json();
+  let json = await response.json();
 
   req.session.access_token = json.access_token;
   req.session.refresh_token = json.refresh_token;
@@ -58,26 +57,25 @@ exports.redirect_url = async (req, res) => {
 
   let patient = json.patient;
 
-  let user = await User.findOne({ patient });
+  let session = await Session.findOne({ patient });
   let hasdAccessToken = await bcrypt.hash(json.access_token, 12);
   let hasdRefreshToken = await bcrypt.hash(json.refresh_token, 12);
 
-      if (user) {
-        user = User.updateMany({
-          //patient,
+      if (session) {
+        session = Session.updateMany({
            $set: { "access_token" : hasdAccessToken } ,
            $set: { "refresh_token" : hasdRefreshToken } ,
         });
         return res.redirect("dashboard");
       }
     
-      user = new User({
+      session = new Session({
         patient,
         access_token: hasdAccessToken,
         refresh_token: hasdRefreshToken
       });
     
-      await user.save();
+      await session.save();
 
   res.redirect("dashboard");
 };
@@ -86,30 +84,66 @@ exports.redirect_url = async (req, res) => {
 // ------ dashboard ------- //
 exports.dashboard_get = async (req, res) => {
 
-    if (!req.session.patient) return res.redirect("./");
+    if (!req.session.id) return res.redirect("./");
 
-    var response = await fetch(patientURI, {
+    let patientID = req.session.patient;
+
+    let response = await fetch(`${patientURI}${patientID}`, {
       method: "GET",
-      headers: { "Authorization": req.session.access_token }
+      headers: { "Authorization": `Bearer ${req.session.access_token}`}
     });
-  
-    var json = await response.json();
 
-    req.session.gender = json.gender;
-    req.session.birthDate = json.birthDate;
+    //
+    let json = await response.json();
 
     res.render("dashboard", {
       patient: req.session.patient,
-      gender: req.session.gender,
+      firstName: json.name[0].given,
+      lastName: json.name[0].family,
+      gender: json.gender, 
+      dob: json.birthDate 
     });
 
 };
 
 
+// ------ immunizations ------- //
+exports.immunizations_get = async (req, res) => {
+
+  if (!req.session.id) return res.redirect("./");
+
+  let patientID = req.session.patient;  
+
+    const response = await fetch(`${immunizationsURI}${patientID}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${req.session.access_token}`}
+    });
+
+    let json = await response.json();
+    res.render('immunizations', { 
+      immunizations : json.entry
+    });
+};
+
+// ------ immunization ------- //
+exports.immunization_get = async (req, res) => {
+  let immunizationID = req.params.id
+
+  const response = await fetch(`${immunizationURI}${immunizationID}`, {
+    method: "GET",
+    headers: { "Authorization": `Bearer ${req.session.access_token}`}
+  });
+
+  let json = await response.json();
+  res.render('immunizationSingle', { 
+    immunization : json
+  });
+};
+
 // ------ logout ------- //
 exports.logout_post = (req, res) => {
-    req.session.destroy((err) => {
-      if (err) throw err;
-      res.redirect("/");
-    });
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
 };
