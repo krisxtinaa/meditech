@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel="stylesheet">
-        <link rel="stylesheet" href="/public/style.css">
-    </head>
-
-    <body>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= typeof title != 'undefined' ? title: 'My allergies' %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel="stylesheet">
+    <link rel="stylesheet" href="/public/style.css">
+  </head>
   
-<%- include('partials/header'); %>
+  <body>
+  
+  <%- include('partials/header'); %>
 
-<div class="wrapper">
-  <div class="information">
-    
-    <% if(allergies != null) { %>
-      <% allergies.forEach(function(allergy, index) { %>
-        <a href="/allergy/<%- allergy.resource.id %>" class="information__card">
-          
-          <div class="icon">
-            <i class="i">
-            <img src="/public/images/document.png">
-          </i>
-        </div>
+    <div class="wrapper">
+      <div class="information">
         
-        <h6> Reaction: <%= allergy.resource.reaction[0].manifestation[0].text %> <h6>
-          <p class="p"> Severity: <%= allergy.resource.reaction[0].severity %> </p>
-          <p class="p"> Substance: <%= allergy.resource.substance.text %> </p>
-          <p class="p"> Code:  <%= allergy.resource.substance.coding[0].code %> </p>
-          <p class="p"> Status: <%= allergy.resource.status %> </p>
-          <p class="p"> Criticality: <%= allergy.resource.criticality %> </p>
-          <p class="p"> Type: <%= allergy.resource.type %> </p>
-          <p class="p"> Date recorded: <%= allergy.resource.recordedDate %> </p>
-      </a>
-      <% }) %>
-      <% } else { %>
-          No immunizations found.
-      <% } %>
-</div>
-</div> 
+        <% if(allergies != null) { %>
+          <% allergies.forEach(function(allergy, index) { %>
+            <a href="/allergy/<%- allergy.resource.id %>" class="information__card">
+              
+              <div class="icon">
+                <i class="i">
+                <img src="/public/images/document.png">
+              </i>
+              </div>
+                <h6> Reaction: <%= allergy.resource.reaction[0].manifestation[0].text %> </h6>
+                <p class="p"> Severity: <%= allergy.resource.reaction[0].severity %> </p>
+                <p class="p"> Substance: <%= allergy.resource.substance.text %> </p>
+                <p class="p"> Code:  <%= allergy.resource.substance.coding[0].code %> </p>
+                <p class="p"> Status: <%= allergy.resource.status %> </p>
+                <p class="p"> Criticality: <%= allergy.resource.criticality %> </p>
+                <p class="p"> Type: <%= allergy.resource.type %> </p>
+                <p class="p"> Date recorded: <%= allergy.resource.recordedDate %> </p>
+            </a>
+          <% }) %>
+          <% } else { %>
+              No allergies found.
+          <% } %>
+    </div>
+  </div> 
 
-<%- include('partials/footer'); %>
+  <%- include('partials/footer'); %>
 
-</body> 
-</html>
+  </body> 
+</html> 
