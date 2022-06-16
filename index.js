@@ -56,19 +56,19 @@ app.get("/redirect-url", appController.redirect_url);
 app.get("/dashboard", isAuth, appController.dashboard_get);
 
 // ------ immunizations ------- //
-app.get("/immunizations", appController.immunizations_get);
+app.get("/immunizations",isAuth, appController.immunizations_get);
 
 // ------ conditions ------- //
-app.get("/conditions", appController.conditions_get);
+app.get("/conditions",isAuth, appController.conditions_get);
 
 // ------ orders ------- //
-app.get("/orders", appController.orders_get);
+app.get("/orders",isAuth, appController.orders_get);
 
 // ------ allergies ------- //
-app.get("/allergies", appController.allergies_get);
+app.get("/allergies",isAuth, appController.allergies_get);
 
 // ------ immunization ------- //
-app.get('/:id', appController.immunization_get);
+app.get('/:id',isAuth, appController.immunization_get);
 
 // // ------ logout ------- //
 app.post("/logout", appController.logout_post);

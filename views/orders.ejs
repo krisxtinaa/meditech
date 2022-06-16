@@ -11,12 +11,12 @@
     </head>
 
     <body>
-  
+      <% if(orders != null) { %>
         <%- include('partials/header'); %>
 
           <div class="wrapper">
             <div class="information">
-                <% if(orders != null) { %>
+
                 <% orders.forEach(function(order, index) { %>
                     <a href="/order/<%- order.resource.id %>" class="information__card">
                       <div class="icon">
@@ -30,12 +30,12 @@
                     <p class="p"> Date prescribed: <%= order.resource.dateWritten %> </p>
                   </a>
                 <% }) %>
-                <% } else { %>
-                    No medication orders found.
-                <% } %>
             </div>
           </div>
 
           <%- include('partials/footer'); %>
+          <% } else { %>
+            No medical orders found.
+        <% } %>
     </body>
 </html>

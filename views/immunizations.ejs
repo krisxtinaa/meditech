@@ -34,13 +34,13 @@
               <p class="p"> Not given: <%= immunization.resource.wasNotGiven %> </p>
             </a>
           <% }) %>
-          <% } else { %>
-              No immunizations found.
-          <% } %>
     </div>
   </div> 
 
   <%- include('partials/footer'); %>
+  <% } else { %>
+    No immunizations found.
+<% } %>
 
 </body> 
 </html> 

@@ -87,9 +87,10 @@ exports.redirect_url = async (req, res) => {
 // ------ dashboard ------- //
 exports.dashboard_get = async (req, res) => {
 
-    if (!req.session.id) return res.redirect("./");
+    if (!req.session.id) return res.redirect("/");
 
     let patientID = req.session.patient;
+    req.session.isAuth = true;
 
     let response = await fetch(`${patientURI}${patientID}`, {
       method: "GET",
@@ -100,11 +101,7 @@ exports.dashboard_get = async (req, res) => {
     let json = await response.json();
 
     res.render("dashboard", {
-      patient: req.session.patient,
-      firstName: json.name[0].given,
-      lastName: json.name[0].family,
-      gender: json.gender, 
-      dob: json.birthDate 
+      patient: json
     });
 
 };
@@ -112,9 +109,10 @@ exports.dashboard_get = async (req, res) => {
 // ------ immunizations ------- //
 exports.immunizations_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("./");
+  if (!req.session.id) return res.redirect("/");
 
   let patientID = req.session.patient;  
+  req.session.isAuth = true;
 
     const response = await fetch(`${immunizationsURI}${patientID}`, {
       method: "GET",
@@ -129,7 +127,9 @@ exports.immunizations_get = async (req, res) => {
 
 // ------ immunization ------- //
 exports.immunization_get = async (req, res) => {
+  if (!req.session.id) return res.redirect("/");
   let immunizationID = req.params.id
+  req.session.isAuth = true;
 
   const response = await fetch(`${immunizationURI}${immunizationID}`, {
     method: "GET",
@@ -146,9 +146,10 @@ exports.immunization_get = async (req, res) => {
 // ------ conditions ------- //
 exports.conditions_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("./");
+  if (!req.session.id) return res.redirect("/");
 
-  let patientID = req.session.patient;  
+  let patientID = req.session.patient;
+  req.session.isAuth = true;  
 
     const response = await fetch(`${condtionURI}${patientID}`, {
       method: "GET",
@@ -164,9 +165,10 @@ exports.conditions_get = async (req, res) => {
 // ------ medication orders ------- //
 exports.orders_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("./");
+  if (!req.session.id) return res.redirect("/");
 
-  let patientID = req.session.patient;  
+  let patientID = req.session.patient;
+  req.session.isAuth = true;  
 
     const response = await fetch(`${medicationOrderURI}${patientID}`, {
       method: "GET",
@@ -183,9 +185,10 @@ exports.orders_get = async (req, res) => {
 // ------ allergies ------- //
 exports.allergies_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("./");
+  if (!req.session.id) return res.redirect("/");
 
-  let patientID = req.session.patient;  
+  let patientID = req.session.patient; 
+  req.session.isAuth = true; 
 
     const response = await fetch(`${allergyURI}${patientID}`, {
       method: "GET",

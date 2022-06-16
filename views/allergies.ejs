@@ -38,13 +38,14 @@
                 <p class="p"> Date recorded: <%= allergy.resource.recordedDate %> </p>
             </a>
           <% }) %>
-          <% } else { %>
-              No allergies found.
-          <% } %>
+
     </div>
   </div> 
 
   <%- include('partials/footer'); %>
+  <% } else { %>
+    No allergies found.
+<% } %>
 
   </body> 
 </html> 
