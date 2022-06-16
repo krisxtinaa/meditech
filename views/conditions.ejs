@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel="stylesheet">
         <link rel="stylesheet" href="/public/style.css">
     </head>
 
@@ -17,15 +18,21 @@
                 <% if(conditions != null) { %>
                 <% conditions.forEach(function(condition, index) { %>
                     <a href="/condition/<%- condition.resource.id %>" class="information__card">
-                    <p class="is-medium"> Clinical status: <%= condition.resource.clinicalStatus %> </p>
-                    <p class="is-medium"> Verification: <%= condition.resource.verificationStatus %> </p>
-                    <p class="is-medium"> Condition name: <%= condition.resource.category.coding[0].display %> </p>
+                      <div class="icon">
+                        <i class="i">
+                        <img src="/public/images/stetoscope.png">
+                      </i>
+                    </div>
+                    <h6> Condition name: <%= condition.resource.category.coding[0].display %> </h6>
+                    <p class="p"> Clinical status: <%= condition.resource.clinicalStatus %> </p>
+                    <p class="p"> Verification: <%= condition.resource.verificationStatus %> </p>
+
 
                     <% if(condition.resource.dateRecorded != null) { %>
 
-                      <p class="is-medium"> Date recorded: <%= condition.resource.dateRecorded %> </p>
+                      <p class="p"> Date recorded: <%= condition.resource.dateRecorded %> </p>
                     <% } else { %>
-                      <p class="is-medium"> Date recorded: N/A </p>
+                      <p class="p"> Date recorded: N/A </p>
                     <% } %>
                   </a>
                 <% }) %>

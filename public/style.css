@@ -1,9 +1,3 @@
-body {
-  margin: 0;
-  font-family: 'Source Sans Pro', sans-serif;
-  background-color: #f6f6f6;
-}
-
 img {
   max-width: 100%;
 }
@@ -12,33 +6,6 @@ h2 {
   font-size: 1.6rem;
 }
 
-.header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 10px;
-  color: #fff;
-  background-color: #10555A;
-  margin-bottom: 10px;
-}
-
-.header__search input[type=text] {
-  padding: 6px;
-  border: none;
-}
-
-.header__search input[type=submit] {
-  float: right;
-  padding: 6px 10px;
-  border: none;
-  cursor: pointer;
-}
 
 .wrapper {
   padding: 0 1rem;
@@ -57,12 +24,10 @@ h2 {
   color: #080808;
   background-color: #fff;
   padding: 20px;
+  box-shadow: 0px 0px 5px 0px #a5a5a5;
+  border-radius: 10px;
 }
 
-.information__card:hover {
-  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
-          box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
-}
 
 .information-single {
   background-color: #fff;
@@ -85,5 +50,55 @@ h2 {
   border: none;
   font-size: 14px;
   justify-content: center;
+  font-family: Inter;
 }
-/*# sourceMappingURL=styles.css.map */
+
+.btn:hover{
+  background: white;
+  color: #405DD6;
+  border-color: #405DD6; 
+ }
+
+body{
+  font-family: Inter;
+  margin-top:20px;
+  color: #1a202c;
+  text-align: left;
+  background-color: #e2e8f0;    
+}
+.main-body {
+  padding: 15px;
+}
+
+.information__card  .icon {
+  padding: 10px 0px;
+  background-color: #fff;
+  margin: -35px auto 20px;
+  width: 50px !important;
+  height: 50px !important;
+}
+.information__card .icon i {
+  color: #405DD6;
+  font-size: 0px;
+  margin: 0 auto;
+  display: table;
+}
+
+.information__card:hover {
+-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+}
+
+.information__card  p {
+  font-size: 15px;
+  line-height: 23px;
+  color:#a09f9f;
+  text-align: center;
+}
+
+.information__card  h6 {
+  text-transform: uppercase;
+  text-align: center;
+  color: #6b6b6b;
+  font-weight: 200;
+}

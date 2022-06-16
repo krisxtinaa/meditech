@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Inter';
     background-color: #f6f6f6;
 }
 
@@ -15,25 +15,11 @@ h2 { font-size: 1.6rem; }
     color: #fff;
     background-color: #10555A;
     margin-bottom: 10px;
-
-    &__search {
-        input[type=text] {
-            padding: 6px;
-            border: none;
-        }
-
-        input[type=submit] {
-            float: right;
-            padding: 6px 10px;
-            border: none;
-            cursor: pointer;
-        }
-    }
 }
 
 .wrapper { padding: 0 1rem }
 
-.immunizations {
+.information {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     grid-gap: 2rem;
@@ -51,9 +37,25 @@ h2 { font-size: 1.6rem; }
     }
 }
 
-.immunizations-single {
-    background-color: #fff;
-    max-width: 1300px;
+// .information-single {
+//     background-color: #fff;
+//     max-width: 1300px;
+//     margin: 0 auto;
+//     padding: 2rem;
+// }
+
+.btn {
+    text-decoration: none;
+    display: block;
+    width: 80px;
+    height: 40px;
+    line-height: 38px;
+    padding-top: 2px;
+    border-radius: 8px;
+    color: white;
+    background: #405DD6;;
     margin: 0 auto;
-    padding: 2rem;
+    border: none;
+    font-size: 14px;
+    justify-content: center;
 }

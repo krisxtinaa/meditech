@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel="stylesheet">
   <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
@@ -18,13 +18,20 @@
 
     <div class="wrapper">
       <div class="information">
+        
         <% if(immunizations != null) { %>
           <% immunizations.forEach(function(immunization, index) { %>
             <a href="/immunization/<%- immunization.resource.id %>" class="information__card">
-              <p class="is-medium"> Vaccine Name: <%= immunization.resource.vaccineCode.coding[0].display %> </p>
-              <p class="is-medium"> Status: <%= immunization.resource.status %> </p>
-              <p class="is-medium"> Date: <%= immunization.resource.date %> </p>
-              <p class="is-medium"> Not given: <%= immunization.resource.wasNotGiven %> </p>
+              
+              <div class="icon">
+                <i class="i">
+                <img src="/public/images/vaccine.png">
+              </i>
+            </div>
+              <h6> Vaccine Name: <%= immunization.resource.vaccineCode.coding[0].display %> </h6>
+              <p class="p"> Status: <%= immunization.resource.status %> </p>
+              <p class="p"> Date: <%= immunization.resource.date %> </p>
+              <p class="p"> Not given: <%= immunization.resource.wasNotGiven %> </p>
             </a>
           <% }) %>
           <% } else { %>
