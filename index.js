@@ -58,8 +58,17 @@ app.get("/dashboard", isAuth, appController.dashboard_get);
 // ------ immunizations ------- //
 app.get("/immunizations", appController.immunizations_get);
 
+// ------ conditions ------- //
+app.get("/conditions", appController.conditions_get);
+
+// ------ orders ------- //
+app.get("/orders", appController.orders_get);
+
+// ------ allergies ------- //
+app.get("/allergies", appController.allergies_get);
+
 // ------ immunization ------- //
-app.get('/:id', appController.immunization_get)
+app.get('/:id', appController.immunization_get);
 
 // // ------ logout ------- //
 app.post("/logout", appController.logout_post);

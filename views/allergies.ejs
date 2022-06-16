@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/public/style.css">
+    </head>
+
+    <body>
+  
+      <%- include('partials/header'); %>
+
+
+          <div class="wrapper">
+            <div class="information">
+                <% if(allergies != null) { %>
+                <% allergies.forEach(function(allergy, index) { %>
+                    <a href="/allergy/<%- allergy.resource.id %>" class="information__card">
+                      <p class="is-medium"> Reaction: <%= allergy.resource.reaction[0].manifestation[0].text %> </p>
+                      <p class="is-medium"> Severity: <%= allergy.resource.reaction[0].severity %> </p>
+                      <p class="is-medium"> Substance: <%= allergy.resource.substance.text %> 
+                                            (code:  <%= allergy.resource.substance.coding[0].code %>) 
+                      </p>
+                      <p class="is-medium"> Status: <%= allergy.resource.status %> </p>
+                      <p class="is-medium"> Criticality: <%= allergy.resource.criticality %> </p>
+                      <p class="is-medium"> Type: <%= allergy.resource.type %> </p>
+                      <p class="is-medium"> Date recorded: <%= allergy.resource.recordedDate %> </p>
+                  </a>
+                <% }) %>
+                <% } else { %>
+                    No allergies found.
+                <% } %>
+            </div>
+          </div>
+
+        <%- include('partials/footer'); %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </body>
+</html>

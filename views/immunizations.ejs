@@ -10,41 +10,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/public/style1.css">
+  <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
   
-  <div class="container-xxl px-md-5 bg-white shadow-lg">
+  <%- include('partials/header'); %>
 
-
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <img src="/public/logo.png" width="229" height="68" alt="Tell Health">
-      </a>
-
-      
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="/immunizations" class="nav-link px-2 link-secondary">Immunizations</a></li>
-        <li><a href="/logout" method="POST" class="nav-link px-2 link-secondary">Logout</a></li>
-      </ul>
-    </header>
-
-  <div class="wrapper">
-        <div class="immunizations">
-            <% if(immunizations != null) { %>
-            <% immunizations.forEach(function(immunization, index) { %>
-                <a href="/immunization/<%- immunization.resource.id %>" class="immunizations__card">
-                  <p class="is-medium"> Vaccine Name: <%= immunization.resource.vaccineCode.coding[0].display %> </p>
-                  <p class="is-medium"> Status: <%= immunization.resource.status %> </p>
-                  <p class="is-medium"> Date: <%= immunization.resource.date %> </p>
-                  <p class="is-medium"> Not given: <%= immunization.resource.wasNotGiven %> </p>
-                </a>
-            <% }) %>
-            <% } else { %>
-                No immunizations found.
-            <% } %>
-        </div>
+    <div class="wrapper">
+      <div class="information">
+        <% if(immunizations != null) { %>
+          <% immunizations.forEach(function(immunization, index) { %>
+            <a href="/immunization/<%- immunization.resource.id %>" class="information__card">
+              <p class="is-medium"> Vaccine Name: <%= immunization.resource.vaccineCode.coding[0].display %> </p>
+              <p class="is-medium"> Status: <%= immunization.resource.status %> </p>
+              <p class="is-medium"> Date: <%= immunization.resource.date %> </p>
+              <p class="is-medium"> Not given: <%= immunization.resource.wasNotGiven %> </p>
+            </a>
+          <% }) %>
+          <% } else { %>
+              No immunizations found.
+          <% } %>
+    </div>
   </div> 
+
+  <%- include('partials/footer'); %>
+
 </body> 
 </html> 

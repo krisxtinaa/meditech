@@ -1,49 +1,74 @@
 body {
-  height: 100vh;
   margin: 0;
-  color: #222;
-  font-family: 'Inter';
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #f6f6f6;
+}
+
+img {
+  max-width: 100%;
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(71, 43, 186);
-  background: linear-gradient(0deg, rgba(71, 43, 186, 1) 0%, rgba(44, 25, 121, 1) 100%);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  color: #fff;
+  background-color: #10555A;
+  margin-bottom: 10px;
 }
 
-.img-tellhealth {
-  margin-top: 32px;
-  width: 100px;
-  height: 45px;
+.header__search input[type=text] {
+  padding: 6px;
+  border: none;
 }
 
-.content {
-  background: white;
-  width: 380px;
-  height: 480px;
-  border-radius: 40px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 3px 16px #222;
+.header__search input[type=submit] {
+  float: right;
+  padding: 6px 10px;
+  border: none;
+  cursor: pointer;
 }
 
-.content-bottom {
-  margin: 20px 0;
+.wrapper {
+  padding: 0 1rem;
 }
 
-h1 {
-  font-family: 'Inter';
-  font-size: 26px;
-  margin: 32px auto 24px;
-  line-height: 16px;
+.information {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(360px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-gap: 2rem;
 }
 
-.img-github {
-  margin-top: 32px;
-  width: 160px;
-  height: 160px;
+.information__card {
+  text-decoration: none;
+  color: #080808;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.information__card:hover {
+  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+}
+
+.information-single {
+  background-color: #fff;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .btn {
@@ -61,17 +86,4 @@ h1 {
   font-size: 14px;
   justify-content: center;
 }
-
-
-input[type='text'] {
-  width: 180px;
-  line-height: 32px;
-  margin-bottom: 12px;
-  padding-left: 12px;
-}
-
-.sign-in-text {
-  font-size: 14px;
-  line-height: 22px;
-}
-
+/*# sourceMappingURL=styles.css.map */

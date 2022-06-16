@@ -5,6 +5,9 @@
     "patientURI": "https://greenfield-apis.meditech.com/v1/argonaut/v1/Patient/",
     "immunizationsURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization?patient=",
     "immunizationURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization/",
+    "conditionURI" : "https://greenfield-apis.meditech.com/v1/argonaut/v1/Condition?patient=",
+    "medicationOrderURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/MedicationOrder?patient=",
+    "allergyURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/AllergyIntolerance?patient=",
     "Content-Type": "application/x-www-form-urlencoded",
     "Accept": "application/fhir+json"
 }

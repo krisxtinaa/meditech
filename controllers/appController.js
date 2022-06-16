@@ -2,17 +2,20 @@ require('dotenv').config();
 const bcrypt = require("bcryptjs");
 const Session = require("../models/Session");
 const config = require("config");
+const _encode = require("../middleware/_encode");
+const fetch = require("node-fetch");
+
+const contentType = config.get("Content-Type");
+const accept = config.get("Accept");
 
 const authURI = config.get("authURI");
 const tokenURI = config.get("tokenURI");
 const patientURI = config.get("patientURI");
 const immunizationsURI = config.get("immunizationsURI");
 const immunizationURI = config.get("immunizationURI");
-const _encode = require("../middleware/_encode");
-const contentType = config.get("Content-Type");
-const accept = config.get("Accept");
-
-const fetch = require("node-fetch")
+const condtionURI = config.get("conditionURI");
+const medicationOrderURI = config.get("medicationOrderURI");
+const allergyURI = config.get("allergyURI");
 
 // ------ index ------- //
 exports.index_page = async (req, res) => {
@@ -106,7 +109,6 @@ exports.dashboard_get = async (req, res) => {
 
 };
 
-
 // ------ immunizations ------- //
 exports.immunizations_get = async (req, res) => {
 
@@ -138,6 +140,62 @@ exports.immunization_get = async (req, res) => {
   res.render('immunizationSingle', { 
     immunization : json
   });
+};
+
+
+// ------ conditions ------- //
+exports.conditions_get = async (req, res) => {
+
+  if (!req.session.id) return res.redirect("./");
+
+  let patientID = req.session.patient;  
+
+    const response = await fetch(`${condtionURI}${patientID}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${req.session.access_token}`}
+    });
+
+    let json = await response.json();
+    res.render('conditions', { 
+      conditions : json.entry
+    });
+};
+
+// ------ medication orders ------- //
+exports.orders_get = async (req, res) => {
+
+  if (!req.session.id) return res.redirect("./");
+
+  let patientID = req.session.patient;  
+
+    const response = await fetch(`${medicationOrderURI}${patientID}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${req.session.access_token}`}
+    });
+
+    let json = await response.json();
+    res.render('orders', { 
+      orders : json.entry
+    });
+};
+
+
+// ------ allergies ------- //
+exports.allergies_get = async (req, res) => {
+
+  if (!req.session.id) return res.redirect("./");
+
+  let patientID = req.session.patient;  
+
+    const response = await fetch(`${allergyURI}${patientID}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${req.session.access_token}`}
+    });
+
+    let json = await response.json();
+    res.render('allergies', { 
+      allergies : json.entry
+    });
 };
 
 // ------ logout ------- //
