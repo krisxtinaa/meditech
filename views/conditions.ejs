@@ -28,7 +28,6 @@
                     </div>
                     <h6> Condition name: <%= condition.resource.category.coding[0].display %> </h6>
                     <p class="p"> Clinical status: <%= condition.resource.clinicalStatus %> </p>
-                    <p class="p"> Verification: <%= condition.resource.verificationStatus %> </p>
 
 
                     <% if(condition.resource.dateRecorded != null) { %>
@@ -45,6 +44,7 @@
           <%- include('partials/footer'); %>
           <% } else { %>
             No conditions found.
+            <%- include('partials/footer'); %>
         <% } %>
     </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%= typeof title != 'undefined' ? title: 'My profile' %></title>
+    <title> Tell Health</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,16 +20,14 @@
       <div class="main-body">
             <div class="row gutters-sm">
               <div class="col-md-4 mb-3">
-                <% if(patient.id != null) { %>
+                <% if(condition.id != null) { %>
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="/public/images/avatar.png" alt="Profile" class="rounded-circle" width="150">
+                      <img src="/public/images/condition1.png" alt="Profile" width="150">
                       <div class="mt-3">
 
-                        <h4><%= patient.name[0].given %> <%= patient.name[0].family %></h4>
-                        <p class="text-secondary mb-1"><%= patient.telecom[0].value %></p>
-
+                        <h4> Condition: <%= condition.code.coding[0].display %> </h4>
                       </div>
                     </div>
                   </div>
@@ -39,61 +37,56 @@
                 <div class="card mb-3">
                   <div class="card-body">
                     <div class="row">
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Patient Reference</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              <p class="p"> <%= condition.patient.display %> </p>
+                            </div>
+                          </div>
+                          <hr>
                       <div class="col-sm-3">
-
-                        <h6 class="mb-0">Full Name</h6>
+                        <h6 class="mb-0">Status</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                          <%= patient.name[0].given %> <%= patient.name[0].family %>
+                        <p class="p"> <%= condition.clinicalStatus %> </p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Category Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <p class="p"> <%= condition.category.coding[0].display %> </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Condition System</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <a href=""> <%= condition.code.coding[0].system %> </a>
+                        </div>
+                      </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Condition code</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <p class="p"> <%= condition.code.coding[0].code %> </p>
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Date of Birth</h6>
+                        <h6 class="mb-0">Date Recorded</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                          <%= patient.birthDate %>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Gender</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                          <%= patient.gender %>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                          <%= patient.address[1].line %>, 
-                          <%= patient.address[1].city %>, 
-                          <%= patient.address[1].state %>, 
-                          <%= patient.address[1].postalCode %>,  
-                          <%= patient.address[1].country %>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                          Phone: <%= patient.telecom[0].value %> 
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Communication Language</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                          <%= patient.communication[0].language.coding[0].display %> 
+                        <p class="p"> <%= condition.dateRecorded %> </p>
                       </div>
                     </div>
 
@@ -106,7 +99,7 @@
       </div>
       <%- include('partials/footer'); %>
       <% } else { %>
-        No patient information found.
+        No such condition.
         <%- include('partials/footer'); %>
     <% } %>
   </body>

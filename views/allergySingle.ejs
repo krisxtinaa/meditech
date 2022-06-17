@@ -20,14 +20,14 @@
       <div class="main-body">
             <div class="row gutters-sm">
               <div class="col-md-4 mb-3">
-                <% if(immunization.id != null) { %>
+                <% if(allergy.id != null) { %>
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="/public/images/vaccine1.png" alt="Profile" class="rounded-circle" width="150">
+                      <img src="/public/images/allergy1.png" alt="Profile" width="150">
                       <div class="mt-3">
 
-                        <h4> Vaccine Name: <%= immunization.vaccineCode.coding[0].display %> </h4>
+                        <h4> Reaction: <%= allergy.reaction[0].manifestation[0].text %>  </h4>
 
                       </div>
                     </div>
@@ -43,51 +43,78 @@
                               <h6 class="mb-0">Patient Reference</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                              <p class="p"> <%= immunization.patient.display %> </p>
+                              <p class="p"> <%= allergy.patient.display %> </p>
                             </div>
                           </div>
                           <hr>
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Status</h6>
+                        <h6 class="mb-0">Code</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.status %> </p>
+                        <p class="p"> <%= allergy.substance.coding[0].code %> </p>
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Vaccine Code</h6>
+                          <h6 class="mb-0">Substance</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <p class="p"> <%= immunization.vaccineCode.coding[0].code %> </p>
+                          <p class="p"> <%= allergy.substance.text %> </p>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Vaccine System</h6>
+                          <h6 class="mb-0">Type</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <a href=""> <%= immunization.vaccineCode.coding[0].system %> </a>
+                          <p class="p"> <%= allergy.type %> </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Severity</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <p class="p"> <%= allergy.reaction[0].severity %> </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">System</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <a class="p"> <%= allergy.substance.coding[0].system %> </a>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date Recorded</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <p class="p"> <%= allergy.recordedDate %> </p>
                         </div>
                       </div>
                       <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Date Administered</h6>
+                        <h6 class="mb-0">Status</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.date %> </p>
+                        <p class="p"> <%= allergy.status %> </p>
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Not given</h6>
+                        <h6 class="mb-0">Criticality</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.wasNotGiven %> </p>
+                        <p class="p"> <%= allergy.criticality %> </p>
                       </div>
                     </div>
 

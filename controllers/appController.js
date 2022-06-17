@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require("bcryptjs");
 const Session = require("../models/Session");
+const cookieParser = require("cookie-parser");
 const config = require("config");
 const _encode = require("../middleware/_encode");
 const fetch = require("node-fetch");
@@ -13,8 +14,11 @@ const tokenURI = config.get("tokenURI");
 const patientURI = config.get("patientURI");
 const immunizationsURI = config.get("immunizationsURI");
 const immunizationURI = config.get("immunizationURI");
-const condtionURI = config.get("conditionURI");
+const conditionsURI = config.get("conditionsURI");
+const conditionURI = config.get("conditionURI");
 const medicationOrderURI = config.get("medicationOrderURI");
+const orderURI = config.get("orderURI");
+const allergiesURI = config.get("allergiesURI");
 const allergyURI = config.get("allergyURI");
 
 // ------ index ------- //
@@ -66,6 +70,7 @@ exports.redirect_url = async (req, res) => {
 
       if (session) {
         session = Session.updateMany({
+          //patient,
            $set: { "access_token" : hasdAccessToken } ,
            $set: { "refresh_token" : hasdRefreshToken } ,
         });
@@ -87,7 +92,7 @@ exports.redirect_url = async (req, res) => {
 // ------ dashboard ------- //
 exports.dashboard_get = async (req, res) => {
 
-    if (!req.session.id) return res.redirect("/");
+    if (!req.session.id) return res.redirect("./");
 
     let patientID = req.session.patient;
     req.session.isAuth = true;
@@ -101,7 +106,7 @@ exports.dashboard_get = async (req, res) => {
     let json = await response.json();
 
     res.render("dashboard", {
-      patient: json
+      patient : json
     });
 
 };
@@ -109,7 +114,7 @@ exports.dashboard_get = async (req, res) => {
 // ------ immunizations ------- //
 exports.immunizations_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("/");
+  if (!req.session.id) return res.redirect("./");
 
   let patientID = req.session.patient;  
   req.session.isAuth = true;
@@ -127,8 +132,9 @@ exports.immunizations_get = async (req, res) => {
 
 // ------ immunization ------- //
 exports.immunization_get = async (req, res) => {
-  if (!req.session.id) return res.redirect("/");
+  
   let immunizationID = req.params.id
+
   req.session.isAuth = true;
 
   const response = await fetch(`${immunizationURI}${immunizationID}`, {
@@ -146,12 +152,12 @@ exports.immunization_get = async (req, res) => {
 // ------ conditions ------- //
 exports.conditions_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("/");
+  if (!req.session.id) return res.redirect("./");
 
-  let patientID = req.session.patient;
-  req.session.isAuth = true;  
+  let patientID = req.session.patient;  
+  req.session.isAuth = true;
 
-    const response = await fetch(`${condtionURI}${patientID}`, {
+    const response = await fetch(`${conditionsURI}${patientID}`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${req.session.access_token}`}
     });
@@ -162,13 +168,31 @@ exports.conditions_get = async (req, res) => {
     });
 };
 
+// ------ condition ------- //
+exports.condition_get = async (req, res) => {
+
+  let conditionID = req.params.id
+
+  req.session.isAuth = true;
+
+  const response = await fetch(`${conditionURI}${conditionID}`, {
+    method: "GET",
+    headers: { "Authorization": `Bearer ${req.session.access_token}`}
+  });
+
+  let json = await response.json();
+  res.render('conditionSingle', { 
+    condition : json
+  });
+};
+
 // ------ medication orders ------- //
 exports.orders_get = async (req, res) => {
 
-  if (!req.session.id) return res.redirect("/");
+  if (!req.session.id) return res.redirect("./");
+  req.session.isAuth = true;
 
-  let patientID = req.session.patient;
-  req.session.isAuth = true;  
+  let patientID = req.session.patient;  
 
     const response = await fetch(`${medicationOrderURI}${patientID}`, {
       method: "GET",
@@ -181,16 +205,34 @@ exports.orders_get = async (req, res) => {
     });
 };
 
+// ------ medication ------- //
+exports.order_get = async (req, res) => {
+
+  let orderID = req.params.id
+
+  req.session.isAuth = true;
+
+  const response = await fetch(`${orderURI}${orderID}`, {
+    method: "GET",
+    headers: { "Authorization": `Bearer ${req.session.access_token}`}
+  });
+
+  let json = await response.json();
+  res.render('orderSingle', { 
+    order : json
+  });
+};
+
 
 // ------ allergies ------- //
 exports.allergies_get = async (req, res) => {
 
   if (!req.session.id) return res.redirect("/");
+  req.session.isAuth = true;
 
-  let patientID = req.session.patient; 
-  req.session.isAuth = true; 
+  let patientID = req.session.patient;  
 
-    const response = await fetch(`${allergyURI}${patientID}`, {
+    const response = await fetch(`${allergiesURI}${patientID}`, {
       method: "GET",
       headers: { "Authorization": `Bearer ${req.session.access_token}`}
     });
@@ -199,6 +241,24 @@ exports.allergies_get = async (req, res) => {
     res.render('allergies', { 
       allergies : json.entry
     });
+};
+
+// ------ allergy ------- //
+exports.allergy_get = async (req, res) => {
+
+  let allergyID = req.params.id
+
+  req.session.isAuth = true;
+
+  const response = await fetch(`${allergyURI}${allergyID}`, {
+    method: "GET",
+    headers: { "Authorization": `Bearer ${req.session.access_token}`}
+  });
+
+  let json = await response.json();
+  res.render('allergySingle', { 
+    allergy : json
+  });
 };
 
 // ------ logout ------- //

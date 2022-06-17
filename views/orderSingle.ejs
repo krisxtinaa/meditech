@@ -20,14 +20,14 @@
       <div class="main-body">
             <div class="row gutters-sm">
               <div class="col-md-4 mb-3">
-                <% if(immunization.id != null) { %>
+                <% if(order.id != null) { %>
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="/public/images/vaccine1.png" alt="Profile" class="rounded-circle" width="150">
+                      <img src="/public/images/orders1.png" alt="Profile" width="150">
                       <div class="mt-3">
 
-                        <h4> Vaccine Name: <%= immunization.vaccineCode.coding[0].display %> </h4>
+                        <h4> Medication Reference: <%= order.medicationReference.reference %>  </h4>
 
                       </div>
                     </div>
@@ -43,54 +43,53 @@
                               <h6 class="mb-0">Patient Reference</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                              <p class="p"> <%= immunization.patient.display %> </p>
+                              <p class="p"> <%= order.patient.display %> </p>
                             </div>
                           </div>
                           <hr>
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Status</h6>
+                        <h6 class="mb-0">Product</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.status %> </p>
+                        <p class="p"> <%= order.contained[0].product[0].form.text %> </p>
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Vaccine Code</h6>
+                          <h6 class="mb-0">Contains</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <p class="p"> <%= immunization.vaccineCode.coding[0].code %> </p>
+                          <p class="p"> <%= order.contained[0].code.text %> </p>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Vaccine System</h6>
+                          <h6 class="mb-0">System</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          <a href=""> <%= immunization.vaccineCode.coding[0].system %> </a>
+                          <a href="" class="p"> <%= order.contained[0].code.coding[0].system %> </a>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date prescribed</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <p class="p">  <%= order.dateWritten %> </p>
                         </div>
                       </div>
                       <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Date Administered</h6>
+                        <h6 class="mb-0">Status</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.date %> </p>
+                        <p class="p"> <%= order.status %> </p>
                       </div>
                     </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Not given</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                        <p class="p"> <%= immunization.wasNotGiven %> </p>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
@@ -100,7 +99,7 @@
       </div>
       <%- include('partials/footer'); %>
       <% } else { %>
-        No such immunization.
+        No such order.
         <%- include('partials/footer'); %>
     <% } %>
   </body>

@@ -31,10 +31,7 @@
                 <h6> Reaction: <%= allergy.resource.reaction[0].manifestation[0].text %> </h6>
                 <p class="p"> Severity: <%= allergy.resource.reaction[0].severity %> </p>
                 <p class="p"> Substance: <%= allergy.resource.substance.text %> </p>
-                <p class="p"> Code:  <%= allergy.resource.substance.coding[0].code %> </p>
                 <p class="p"> Status: <%= allergy.resource.status %> </p>
-                <p class="p"> Criticality: <%= allergy.resource.criticality %> </p>
-                <p class="p"> Type: <%= allergy.resource.type %> </p>
                 <p class="p"> Date recorded: <%= allergy.resource.recordedDate %> </p>
             </a>
           <% }) %>
@@ -45,6 +42,7 @@
   <%- include('partials/footer'); %>
   <% } else { %>
     No allergies found.
+    <%- include('partials/footer'); %>
 <% } %>
 
   </body> 

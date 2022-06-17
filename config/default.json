@@ -5,9 +5,12 @@
     "patientURI": "https://greenfield-apis.meditech.com/v1/argonaut/v1/Patient/",
     "immunizationsURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization?patient=",
     "immunizationURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Immunization/",
-    "conditionURI" : "https://greenfield-apis.meditech.com/v1/argonaut/v1/Condition?patient=",
+    "conditionsURI" : "https://greenfield-apis.meditech.com/v1/argonaut/v1/Condition?patient=",
+    "conditionURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/Condition/",
     "medicationOrderURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/MedicationOrder?patient=",
-    "allergyURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/AllergyIntolerance?patient=",
+    "orderURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/MedicationOrder/",
+    "allergiesURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/AllergyIntolerance?patient=",
+    "allergyURI":"https://greenfield-apis.meditech.com/v1/argonaut/v1/AllergyIntolerance/",
     "Content-Type": "application/x-www-form-urlencoded",
     "Accept": "application/fhir+json"
 }
