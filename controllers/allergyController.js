@@ -70,6 +70,8 @@ exports.allergies_get = async (req, res) => {
           type: type, 
           system: system
         });
+
+        await save_allergy.save();
       
 
     res.render('allergySingle', { 

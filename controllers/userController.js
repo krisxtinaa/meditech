@@ -59,6 +59,8 @@ exports.dashboard_get = async (req, res) => {
           phone: telephone,
           language: language
         });
+
+        await save_user.save();
       
   
     res.render("dashboard", {

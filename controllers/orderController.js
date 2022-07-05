@@ -54,8 +54,6 @@ exports.orders_get = async (req, res) => {
     let date = order.dateWritten;
 
 
-   
-
         save_order = new Order({
             patient: patient,
             medificationRef: medification_ref,
@@ -67,7 +65,7 @@ exports.orders_get = async (req, res) => {
           });
       
 
-
+          await save_order.save();
 
     res.render('orderSingle', { 
       order : order

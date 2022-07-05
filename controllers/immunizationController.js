@@ -65,7 +65,7 @@ exports.immunization_get = async (req, res) => {
           });
       
 
-
+          await save_immunization.save();
 
     res.render('immunizationSingle', { 
         immunization : immunization
