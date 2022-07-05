@@ -13,7 +13,7 @@ const sessionSchema = new Schema({
     refresh_token: {
         type: String,
         required: true
-    }
+    }, 
     // expires_in: {
     //     type: Number
     // }

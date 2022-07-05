@@ -1,45 +1,42 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const allergySchema = new Schema({
     patient: {
         type: String, 
         required: true
     },
-    familyName: {
+    allergyID: {
+        type: String,
+        required: true
+    },
+    reaction: {
         type: String
     },
-    givenName: {
+    severity: {
         type: String
     },
-    gender: {
-        type: String
-    },
-    dob: {
+    date: {
         type: Date
     },
-    street: {
+    substance: {
         type: String
     },
-    city: {
+    code: {
         type: String
     },
-    state: {
+    status: {
         type: String
     },
-    postalCode: {
+    criticality: {
         type: String
     },
-    country: {
+    type: {
         type: String
     },
-    phone: {
+    system: {
         type: String
-    },
-    language: {
-        type: String
-    },
+    }
 });
 
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Allergy', allergySchema);
