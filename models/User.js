@@ -7,10 +7,10 @@ const userSchema = new Schema({
         required: true
     },
     familyName: {
-        type: String
+        type: Array
     },
     givenName: {
-        type: String
+        type: Array
     },
     gender: {
         type: String
@@ -19,7 +19,7 @@ const userSchema = new Schema({
         type: Date
     },
     street: {
-        type: String
+        type: Array
     },
     city: {
         type: String
